@@ -186,7 +186,6 @@ local player = Players.LocalPlayer
 local camera = workspace.CurrentCamera
 
 local DISTANCE = 30
-local SMOOTH = 0.15
 
 RunService.RenderStepped:Connect(function()
 	if not player.Character then return end
@@ -215,10 +214,7 @@ RunService.RenderStepped:Connect(function()
 	
 	if closest then
 		local head = closest.Character.Head
-		
 		local camPos = camera.CFrame.Position
-		local targetCF = CFrame.new(camPos, head.Position)
-		
-		camera.CFrame = camera.CFrame:Lerp(targetCF, SMOOTH)
+		camera.CFrame = CFrame.new(camPos, head.Position) -- snap ngay lập tức
 	end
 end)
