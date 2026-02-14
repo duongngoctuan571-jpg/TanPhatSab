@@ -185,7 +185,7 @@ local RunService = game:GetService("RunService")
 local player = Players.LocalPlayer
 local camera = workspace.CurrentCamera
 
-local DISTANCE = 30
+local DISTANCE = 50
 
 RunService.RenderStepped:Connect(function()
 	if not player.Character then return end
