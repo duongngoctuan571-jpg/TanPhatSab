@@ -1,3 +1,5 @@
+loadstring(game:HttpGet("https://raw.githubusercontent.com/minhducnek/DucaRoblox/refs/heads/main/Fix-Lag.lua"))()
+
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local Camera = workspace.CurrentCamera
@@ -21,26 +23,22 @@ local function removeTracer(player)
     end
 end
 
--- Tạo tracer cho player hiện có
 for _, player in pairs(Players:GetPlayers()) do
     if player ~= LocalPlayer then
         createTracer(player)
     end
 end
 
--- Player mới vào
 Players.PlayerAdded:Connect(function(player)
     if player ~= LocalPlayer then
         createTracer(player)
     end
 end)
 
--- Player rời game
 Players.PlayerRemoving:Connect(function(player)
     removeTracer(player)
 end)
 
--- Update mỗi frame
 RunService.RenderStepped:Connect(function()
     for player, line in pairs(tracers) do
         if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
@@ -89,7 +87,6 @@ local function removeBox(player)
     end
 end
 
--- Tạo box cho player hiện có
 for _, player in pairs(Players:GetPlayers()) do
     if player ~= LocalPlayer then
         createBox(player)
@@ -117,13 +114,11 @@ RunService.RenderStepped:Connect(function()
                 local height = math.abs(headPos.Y - rootPos.Y)
                 local width = height / 2
 
-                -- Tính góc box
                 local topLeft = Vector2.new(rootPos.X - width/2, headPos.Y)
                 local topRight = Vector2.new(rootPos.X + width/2, headPos.Y)
                 local bottomLeft = Vector2.new(rootPos.X - width/2, rootPos.Y)
                 local bottomRight = Vector2.new(rootPos.X + width/2, rootPos.Y)
 
-                -- Gán line
                 box.Top.From = topLeft
                 box.Top.To = topRight
 
@@ -152,9 +147,6 @@ RunService.RenderStepped:Connect(function()
     end
 end)
 
-
-
-
 local player = game.Players.LocalPlayer
 local gui = Instance.new("ScreenGui")
 gui.Parent = player:WaitForChild("PlayerGui")
@@ -167,18 +159,15 @@ circle.Position = UDim2.new(0.5, -100, 0.5, -100) -- giữa màn hình
 circle.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- nền trong
 circle.BackgroundTransparency = 1
 
--- Bo tròn thành hình tròn
 local corner = Instance.new("UICorner")
 corner.CornerRadius = UDim.new(1, 0)
 corner.Parent = circle
 
--- Tạo viền đỏ
 local stroke = Instance.new("UIStroke")
 stroke.Color = Color3.fromRGB(255, 0, 0)
 stroke.Thickness = 2
 stroke.Parent = circle
 
--- aim
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 
@@ -215,6 +204,6 @@ RunService.RenderStepped:Connect(function()
 	if closest then
 		local head = closest.Character.Head
 		local camPos = camera.CFrame.Position
-		camera.CFrame = CFrame.new(camPos, head.Position) -- snap ngay lập tức
+		camera.CFrame = CFrame.new(camPos, head.Position)
 	end
 end)
